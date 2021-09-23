@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/WebService/.vs/WebService
+/WebService/WebService.Service/bin/Debug/netcoreapp3.1
+/WebService/WebService.Service/obj
