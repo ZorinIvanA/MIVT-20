@@ -1,5 +1,6 @@
 ﻿using Books.Books.Domain.Entities;
 using Books.Books.Domain.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,20 @@ namespace Books.Books.Controllers
 
         public BooksController(IBooksRepository booksRepository)
         {
-            _booksRepository = booksRepository;
+            _booksRepository = booksRepository ?? throw new ArgumentNullException(nameof(booksRepository));
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_booksRepository.GetBooks());
+            try
+            {
+                return Ok(_booksRepository.GetBooks());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
