@@ -18,6 +18,13 @@ namespace Books.Books.Infrastructure.Repositories
             _configuration = configuration;
         }
 
+        public int Delete(int id)
+        {
+            var sqlQuery = $"DELETE FROM public.Books WHERE id={id};";
+
+            return StartSqlCommand(sqlQuery);
+        }
+
         public Book[] GetBooks()
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(_configuration.GetSection("Database:DbString").Value))
@@ -40,6 +47,34 @@ namespace Books.Books.Infrastructure.Repositories
                     }
 
                     return books.Select(x => x.GetBook()).ToArray();
+                }
+            }
+        }
+
+        public int Insert(Book book)
+        {
+            var sqlQuery = $"INSERT INTO public.Books (id, name, author) VALUES ({book.Id},'{book.BookName}','{book.Author}');";
+
+            return StartSqlCommand(sqlQuery);
+        }
+
+        public int Update(Book book)
+        {
+            var sqlQuery = $"UPDATE public.Books SET name='{book.BookName}', author='{book.Author}' WHERE id = {book.Id};";
+
+            return StartSqlCommand(sqlQuery);
+        }
+
+        private int StartSqlCommand(string sqlQuery)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(_configuration.GetSection("Database:DbString").Value))
+            {
+                using (var command = new NpgsqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    var result = command.ExecuteNonQuery();
+
+                    return 0;
                 }
             }
         }

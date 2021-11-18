@@ -8,6 +8,9 @@ namespace Books.Books.Domain.Interfaces
 {
     public interface IBooksRepository
     {
-        public Book[] GetBooks();
+        Book[] GetBooks();
+        int Insert(Book book);
+        int Update(Book book);
+        int Delete(int id);
     }
 }
