@@ -6,3 +6,10 @@
 /WebService/.vs/WebService
 /WebService/WebService.Service/bin/Debug/netcoreapp3.1
 /WebService/WebService.Service/obj
+/Books/Books/.vs/Books
+/Books/Books/Books.Books/bin/Debug/netcoreapp3.1
+/Books/Books/Books.Books/obj/Debug/netcoreapp3.1
+/Books/Books/Books.Books/obj/Release/netcoreapp3.1
+/Books/Books/Books.Books/obj
+/Books/Books/Test/bin/Debug/netcoreapp3.1/Properties
+/Books/Books/Test/obj
